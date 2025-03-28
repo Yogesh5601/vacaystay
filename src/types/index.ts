@@ -10,3 +10,12 @@ export type Property = {
     baths: number
     rating: number
   }
+
+import { User } from "next-auth";
+
+export interface IUser extends User {
+  id: string;
+  email: string;
+  name?: string;
+  password?: string;
+}
