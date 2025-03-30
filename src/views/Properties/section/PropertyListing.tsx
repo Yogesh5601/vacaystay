@@ -2,24 +2,25 @@
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { PropertyCard } from "@/components/common/PropertyCard";
-import { featuredProperties } from "@/data";
-import { Pagination } from "@/components/common/Pagination";
+import Pagination  from "@/components/common/Pagination";
 
-export const PropertyList = () => {
+export const PropertyList = ({featuredProperties}:any) => {
   return (
     <div className="w-full md:w-3/4 space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Properties (24)</h1>
+        <h1 className="text-2xl font-bold">Properties ({featuredProperties?.data?.length || 0})</h1>
         <SortSelector />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {featuredProperties.map((property) => (
-          <PropertyCard property={property} key={property.id} />
+        {featuredProperties?.data?.map((property:any) => (
+          <PropertyCard property={property} key={property._id} />
         ))}
       </div>
 
-      <Pagination />
+      <Pagination totalPages={0} currentPage={0} onPageChange={function (page: number): void {
+        throw new Error("Function not implemented.");
+      } } />
     </div>
   );
 };

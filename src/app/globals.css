@@ -44,38 +44,66 @@
 }
 
 :root {
+  /* Base Styles */
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --font-sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  
+  /* Base Neutrals */
+  --background: oklch(0.99 0 0);            /* Bright White */
+  --foreground: oklch(0.17 0 0);            /* Deep Gray (near-black) */
+  --card: oklch(1 0 0);                     /* Pure White (cards/modals) */
+  --muted: oklch(0.96 0.02 100);            /* Cool Light Gray */
+  --border: oklch(0.9 0.03 110);            /* Soft Gray Border */
+
+  /* Vibrant Getaway Palette */
+  --primary: oklch(0.5 0.18 250);           /* Tropical Blue */
+  --primary-hover: oklch(0.45 0.2 250);     /* Darker Tropical Blue */
+  --primary-foreground: oklch(0.99 0 0);    /* White */
+  
+  --secondary: oklch(0.85 0.16 80);         /* Sunshine Yellow */
+  --secondary-hover: oklch(0.8 0.18 80);     /* Darker Sunshine Yellow */
+  --secondary-foreground: oklch(0.17 0 0);   /* Deep Gray */
+  
+  --accent: oklch(0.65 0.22 20);            /* Coral Pink */
+  --accent-hover: oklch(0.6 0.24 20);       /* Darker Coral Pink */
+  --accent-foreground: oklch(0.99 0 0);     /* White */
+
+  /* Status Colors */
+  --destructive: oklch(0.6 0.25 25);        /* Vibrant Red */
+  --success: oklch(0.7 0.2 140);            /* Lime Green */
+  --warning: oklch(0.85 0.16 80);           /* Sunshine Yellow */
+  --info: oklch(0.5 0.18 250);              /* Tropical Blue */
+
+  /* Interactive States */
+  --ring: oklch(0.5 0.18 250);              /* Tropical Blue (matches primary) */
+  --input: oklch(0.95 0.03 100);            /* Light Gray */
+  --focus: oklch(0.5 0.18 250 / 0.2);       /* Primary with opacity */
+
+  /* Charts (Vibrant Mix) */
+  --chart-1: oklch(0.65 0.22 20);           /* Coral */
+  --chart-2: oklch(0.5 0.18 250);           /* Tropical Blue */
+  --chart-3: oklch(0.85 0.16 80);           /* Sunshine Yellow */
+  --chart-4: oklch(0.7 0.2 140);            /* Lime Green */
+  --chart-5: oklch(0.55 0.15 300);          /* Purple */
+
+  /* Navigation & Sidebar */
+  --sidebar: oklch(0.99 0 0);               /* White */
+  --sidebar-primary: oklch(0.5 0.18 250);   /* Tropical Blue */
+  --sidebar-accent: oklch(0.65 0.22 20);    /* Coral Pink */
+  --nav-link: oklch(0.5 0.1 250);           /* Muted Tropical Blue */
+  --nav-link-active: oklch(0.5 0.18 250);    /* Vibrant Tropical Blue */
+
+  /* Property Cards */
+  --card-shadow: 0 2px 8px oklch(0 0 0 / 0.1);
+  --card-hover: 0 4px 12px oklch(0 0 0 / 0.15);
+  --card-badge: oklch(0.65 0.22 20);        /* Coral Pink for "Featured" badges */
+
+  /* Booking Widget */
+  --booking-highlight: oklch(0.85 0.16 80); /* Sunshine Yellow */
+  --booking-selected: oklch(0.5 0.18 250);  /* Tropical Blue */
+  --booking-available: oklch(0.7 0.2 140);  /* Lime Green */
+  --booking-unavailable: oklch(0.9 0.03 110); /* Light Gray */
 }
 
 .dark {

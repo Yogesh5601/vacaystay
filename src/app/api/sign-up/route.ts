@@ -1,51 +1,71 @@
+
 import { NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
+import { createUserWithEmailAndPassword, deleteUser } from "firebase/auth";
+import { auth } from "@/lib/firebase";
 import dbConnect from "@/lib/db";
 import User from "@/models/User";
 
-export async function POST(request: Request) {
+export async function POST(req: Request) {
+  let firebaseUser = null;
+  
   try {
-    const { email, password, name } = await request.json();
+    const { email, password, name } = await req.json();
 
+    // Validate input
     if (!email || !password || !name) {
       return NextResponse.json(
-        { message: "Email, password, and name are required" },
+        { error: "Missing required fields" }, 
         { status: 400 }
       );
     }
 
-   await dbConnect();
-console.log("connect")
-    const existingUser = await User.findOne({ email });
+    // Connect to MongoDB
+    await dbConnect();
 
+    // Check for existing user
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
       return NextResponse.json(
-        { message: "Email already in use" },
+        { error: "User already exists" }, 
         { status: 400 }
       );
     }
 
-    const hashedPassword = await bcrypt.hash(password, 12);
+    // Create Firebase user
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    firebaseUser = userCredential.user;
 
-    const newUser = {
+    // Save to MongoDB
+    const newUser = await User.create({
       email,
       name,
-      password: hashedPassword,
-      emailVerified: null,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-
-    await User.insertOne(newUser);
+      password,
+      firebaseUID: firebaseUser.uid,
+    });
 
     return NextResponse.json(
-      { message: "User created successfully" },
+      { message: "User registered successfully", user: newUser }, 
       { status: 201 }
     );
-  } catch (error) {
-    console.error("Signup error:", error);
+
+  } catch (error: any) {
+    // Cleanup Firebase user if MongoDB save failed
+    if (firebaseUser) {
+      try {
+        await deleteUser(firebaseUser);
+        console.log(`Rolled back Firebase user ${firebaseUser.uid} due to MongoDB failure`);
+      } catch (deleteError) {
+        console.error("Failed to delete Firebase user during rollback:", deleteError);
+      }
+    }
+
+    console.error("Error in sign-up:", error);
+    
     return NextResponse.json(
-      { message: "An error occurred during signup" },
+      { 
+        error: "Internal Server Error",
+        details: error.message 
+      }, 
       { status: 500 }
     );
   }

@@ -32,7 +32,7 @@ export function GuestSelector({ adults, children, pets, onChange }: GuestSelecto
           {adults + children} travelers
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-72 p-4 space-y-3">
+      <PopoverContent className="w-72 p-4 space-y-3 bg-white">
         <div className="flex justify-between items-center">
           <span>Adults</span>
           <div className="flex items-center space-x-2">
@@ -41,11 +41,12 @@ export function GuestSelector({ adults, children, pets, onChange }: GuestSelecto
               variant="outline" 
               onClick={() => updateCount("adults", -1)}
               disabled={adults <= 1}
+            className="hover:bg-primary"
             >
               <Minus size={16} />
             </Button>
             <span className="w-6 text-center">{adults}</span>
-            <Button size="icon" variant="outline" onClick={() => updateCount("adults", 1)}>
+            <Button size="icon" variant="outline" onClick={() => updateCount("adults", 1)} className="hover:bg-primary">
               <Plus size={16} />
             </Button>
           </div>
@@ -59,11 +60,12 @@ export function GuestSelector({ adults, children, pets, onChange }: GuestSelecto
               variant="outline" 
               onClick={() => updateCount("children", -1)}
               disabled={children <= 0}
+              className="hover:bg-primary"
             >
               <Minus size={16} />
             </Button>
             <span className="w-6 text-center">{children}</span>
-            <Button size="icon" variant="outline" onClick={() => updateCount("children", 1)}>
+            <Button size="icon" variant="outline" onClick={() => updateCount("children", 1)} className="hover:bg-primary">
               <Plus size={16} />
             </Button>
           </div>
@@ -74,6 +76,7 @@ export function GuestSelector({ adults, children, pets, onChange }: GuestSelecto
             id="pets"
             checked={pets}
             onCheckedChange={(checked) => onChange({ adults, children, pets: !!checked })}
+            className="border-black"
           />
           <label htmlFor="pets" className="text-sm">
             I am traveling with pets

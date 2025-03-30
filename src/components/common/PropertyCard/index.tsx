@@ -6,16 +6,17 @@ import { MapPin, Star } from 'lucide-react'
 import { Property } from '@/types'
 
 interface PropertyCardProps {
-  property: Property
+  property: any
 }
 
 export const PropertyCard = ({ property }: PropertyCardProps) => {
+  console.log(property,"property._id")
   return (
-    <Link href={`/properties/${property.id}`} className="group">
+    <Link href={`/properties/${property._id}`} className="group">
       <Card className="overflow-hidden transition-all duration-300 group-hover:shadow-lg h-full flex flex-col p-0">
         <div className="relative aspect-video">
           <Image
-            src={property.image || "/placeholder.svg"}
+            src={property.coverImage}
             alt={property.title}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"

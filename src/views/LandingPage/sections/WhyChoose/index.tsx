@@ -3,7 +3,7 @@ import Image from "next/image"
 
 const WhyChoose = () => {
   return (
-    <section className="bg-muted py-12 md:py-16 w-full flex justify-center">
+    <section className="bg-muted py-12 px-4 md:py-16 w-full flex justify-center">
     <div className="container">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div>

@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Users, Star } from "lucide-react"
 import { DatePickerWithRange } from "./DatePickerWithRange"
+import { DateRange } from "react-day-picker"
+import { DateRangePicker } from "@/components/common/DateRangepicker"
 
 interface BookingCardProps {
   pricePerNight: number
@@ -22,10 +24,12 @@ export function BookingCard({
   serviceFee
 }: BookingCardProps) {
   const [guests, setGuests] = useState(2)
-  const [dateRange, setDateRange] = useState<{ from: Date | undefined; to: Date | undefined }>({
-    from: undefined,
-    to: undefined,
-  })
+  // const [dateRange, setDateRange] = useState<{ from: Date | undefined; to: Date | undefined }>({
+  //   from: undefined,
+  //   to: undefined,
+  // })
+
+  const [dates, setDates] = useState<DateRange | undefined>();
 
   return (
     <Card className="sticky top-24">
@@ -45,11 +49,12 @@ export function BookingCard({
           <div className="grid grid-cols-2 divide-x">
             <div className="p-4">
               <div className="text-sm font-medium">Check-in</div>
-              <DatePickerWithRange dateRange={dateRange} setDateRange={setDateRange} className="w-full" />
+              <DateRangePicker value={dates} onChange={setDates} />
             </div>
             <div className="p-4">
               <div className="text-sm font-medium">Check-out</div>
-              <DatePickerWithRange dateRange={dateRange} setDateRange={setDateRange} className="w-full" />
+              {/* <DatePickerWithRange dateRange={dateRange} setDateRange={setDateRange} className="w-full" /> */}
+              <DateRangePicker value={dates} onChange={setDates} />
             </div>
           </div>
           <div className="border-t p-4">
@@ -63,7 +68,7 @@ export function BookingCard({
                 <Button
                   variant="outline"
                   size="icon"
-                  className="h-8 w-8"
+                  className="h-8 w-8 hover:bg-primary"
                   onClick={() => setGuests(Math.max(1, guests - 1))}
                   disabled={guests <= 1}
                 >
@@ -73,7 +78,7 @@ export function BookingCard({
                 <Button
                   variant="outline"
                   size="icon"
-                  className="h-8 w-8"
+                  className="h-8 w-8 hover:bg-primary"
                   onClick={() => setGuests(Math.min(maxGuests, guests + 1))}
                   disabled={guests >= maxGuests}
                 >

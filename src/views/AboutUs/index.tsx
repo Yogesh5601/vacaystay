@@ -8,8 +8,8 @@ import { ValuesSection } from "./Section/ValuesSection";
 
 export default function AboutUs() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <main className="flex-1">
+    <div className="flex flex-col justify-center min-h-screen">
+      <main className="">
         <HeroSection
           title="About VacayStay"
           subtitle="Connecting travelers with exceptional vacation rentals since 2010."

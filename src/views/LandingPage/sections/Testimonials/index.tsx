@@ -9,7 +9,7 @@ import { testimonials } from '@/data'
 
 const Testimanial = () => {
   return (
-    <section className="py-12 md:py-16 w-full flex justify-center">
+    <section className="py-12 px-4  md:py-16 w-full flex justify-center">
     <div className="container">
     <h2 className="text-3xl font-bold tracking-tight text-center mb-8">What Our Guests Say</h2>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

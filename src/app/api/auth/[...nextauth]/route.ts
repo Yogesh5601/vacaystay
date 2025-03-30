@@ -1,135 +1,94 @@
-// import NextAuth, { AuthOptions, User } from "next-auth";
-// import CredentialsProvider from "next-auth/providers/credentials";
-// import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
-// import clientPromise from "@/lib/db";
-// import bcrypt from "bcryptjs";
-// import { WithId, Document } from "mongodb";
-
-// // Type for your user document
-// interface IUser extends WithId<Document> {
-//   email: string;
-//   password: string;
-//   name?: string;
-//   emailVerified?: Date | null;
-// }
-
-// export const authOptions: AuthOptions = {
-//   adapter: MongoDBAdapter(clientPromise),
-//   providers: [
-//     CredentialsProvider({
-//       name: "credentials",
-//       credentials: {
-//         email: { label: "Email", type: "email" },
-//         password: { label: "Password", type: "password" },
-//       },
-//       async authorize(credentials): Promise<User | null> {
-//         if (!credentials?.email || !credentials?.password) {
-//           throw new Error("Please enter an email and password");
-//         }
-
-//         const client = await clientPromise;
-//         const db = client.db();
-//         const user = await db.collection<IUser>("users").findOne({ 
-//           email: credentials.email 
-//         });
-
-//         if (!user || !user.password) {
-//           throw new Error("No user found");
-//         }
-
-//         const passwordMatch = await bcrypt.compare(
-//           credentials.password,
-//           user.password
-//         );
-
-//         if (!passwordMatch) {
-//           throw new Error("Incorrect password");
-//         }
-
-//         return {
-//           id: user._id.toString(),
-//           email: user.email,
-//           name: user.name,
-//         };
-//       },
-//     }),
-//   ],
-//   session: {
-//     strategy: "jwt",
-//   },
-//   secret: process.env.NEXTAUTH_SECRET,
-//   callbacks: {
-//     async jwt({ token, user }) {
-//       if (user) {
-//         token.id = user.id;
-//       }
-//       return token;
-//     },
-//     async session({ session, token }) {
-//       if (session.user && token?.id) {
-//         session.user.email = token.id as string;
-//       }
-//       return session;
-//     },
-//   },
-// };
-
-// const handler = NextAuth(authOptions);
-
-// export { handler as GET, handler as POST };
-
-
-
-import NextAuth, { AuthOptions, SessionStrategy } from "next-auth";
+import NextAuth, { NextAuthOptions, SessionStrategy } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { adminAuth } from "@/lib/firebaseAdmin"; 
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/lib/firebase";
 import dbConnect from "@/lib/db";
 import User from "@/models/User";
-import bcrypt from "bcryptjs";
 
-export const authOptions: AuthOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
-      name: "credentials",
+      name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "email" },
+        email: { label: "Email", type: "email", placeholder: "your@email.com" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        await dbConnect();
-        
-        const user = await User.findOne({ email: credentials?.email });
-        
-        if (!user) return null;
-        
-        const isValid = await bcrypt.compare(
-          credentials?.password || "", 
-          user.password
-        );
-        
-        if (!isValid) return null;
-        
-        return { 
-          id: user._id.toString(), 
-          email: user.email, 
-          name: user.name 
-        };
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error("Email and password are required");
+        }
+      
+        try {
+      
+          // 🔥 Firebase login
+          const userCredential = await signInWithEmailAndPassword(
+            auth,  // Ensure `auth` is correctly imported
+            credentials.email,
+            credentials.password
+          );
+          const user = userCredential.user;
+      
+      
+          // 🔥 Verify Firebase ID token
+          const token = await user.getIdToken();
+          const decodedToken = await adminAuth.verifyIdToken(token);
+      
+      
+          // 🔗 Connect to MongoDB
+          await dbConnect();
+      
+          // 🔎 Check if user exists in MongoDB
+          let existingUser = await User.findOne({ email: decodedToken.email });
+      
+          if (!existingUser) {
+            existingUser = await User.create({
+              email: decodedToken.email,
+              name: user.displayName || "",
+              firebaseUID: decodedToken.uid,
+            });
+          }
+      
+      
+          return {
+            id: existingUser._id.toString(),
+            email: existingUser.email,
+            name: existingUser.name,
+          };
+        } catch (error) {
+          console.error("🔥 Firebase Authentication Error:", error);
+          throw new Error("Invalid email or password");
+        }
       },
+      
     }),
   ],
   session: {
-    strategy: "jwt" as SessionStrategy, // Explicitly typed
+    strategy: "jwt" as SessionStrategy, // ✅ Explicitly define SessionStrategy
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
+      try {
+        if (user) {
+          token.id = user.id;
+          token.email = user.email;
+          token.name = user.name;
+        }
+      } catch (error) {
+        console.error("JWT Callback Error:", error);
       }
       return token;
     },
     async session({ session, token }) {
-      if (session.user) {
-        session.user.email = token.id as string;
+      try {
+        if (session.user) {
+          // session.user.id = token.id as string;
+          session.user.email = token.email as string;
+          session.user.name = token.name as string;
+        }
+      } catch (error) {
+        console.error("Session Callback Error:", error);
       }
       return session;
     },

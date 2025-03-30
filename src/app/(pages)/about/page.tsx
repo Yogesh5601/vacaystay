@@ -3,7 +3,7 @@ import React from 'react'
 
 const AboutPage = () => {
   return (
-    <div><AboutUs /></div>
+    <div className='container  mx-auto  px-4 '><AboutUs /></div>
   )
 }
 

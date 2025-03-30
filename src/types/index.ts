@@ -19,3 +19,9 @@ export interface IUser extends User {
   name?: string;
   password?: string;
 }
+
+// export interface IRole{
+//   SUPER_ADMIN:0;
+//   SUBADMIN:1;
+//   USER:3
+// }

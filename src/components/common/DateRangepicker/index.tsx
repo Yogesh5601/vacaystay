@@ -1,5 +1,5 @@
 // components/DateRangePicker.tsx
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CalendarIcon } from "lucide-react";
 import { format, isBefore, isSameDay } from "date-fns";
 import { Button } from "@/components/ui/button";
@@ -7,6 +7,7 @@ import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
 import { DateRange } from "react-day-picker";
+import axios from "axios";
 
 interface DateRangePickerProps {
   className?: string;
@@ -44,6 +45,8 @@ export function DateRangePicker({
     return isBefore(date, new Date());
   };
 
+
+
   return (
     <div className={cn("grid gap-2", className)}>
       <Popover open={isOpen} onOpenChange={setIsOpen}>
@@ -69,7 +72,7 @@ export function DateRangePicker({
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
+        <PopoverContent className="w-auto p-0 bg-white"  align="start">
           <Calendar
             mode="single"
             selected={activePicker === "from" ? value?.from : value?.to}

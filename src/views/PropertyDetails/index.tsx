@@ -12,17 +12,18 @@ import { PropertyReviews } from "./sections/PropertyReviews"
 
 
 export default function PropertyDetail({property}:any) {
+  console.log(property,"propertyproperty")
   return (
     <main className="flex-1">
     <div className="container py-8">
       <PropertyHeader 
         title={property.title}
         location={property.location}
-        rating={property.rating}
-        reviewsCount={property.reviews.length}
+        rating={property.rating || 3}
+        reviewsCount={property.reviews?.length}
       />
 
-      <PropertyGallery images={property.images} title={property.title} />
+      <PropertyGallery coverImage={property.coverImage} images={property.images} title={property.title} />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
@@ -35,17 +36,17 @@ export default function PropertyDetail({property}:any) {
 
           <PropertyDescription description={property.description} />
           <PropertyAmenities amenities={property.amenities} />
-          <PropertyLocation location={property.location} />
-          <PropertyReviews rating={property.rating} reviews={property.reviews} />
+          {/* <PropertyLocation location={property.location} /> */}
+          {/* <PropertyReviews rating={property.rating} reviews={property.reviews} /> */}
         </div>
 
         <div>
           <BookingCard
             pricePerNight={property.pricePerNight}
-            rating={property.rating}
-            maxGuests={property.maxGuests}
-            cleaningFee={property.cleaningFee}
-            serviceFee={property.serviceFee}
+            rating={property.rating || 3}
+            maxGuests={property.maxGuests ||5}
+            cleaningFee={property.cleaningFee || 20}
+            serviceFee={property.serviceFee || 30}
           />
         </div>
       </div>

@@ -12,7 +12,7 @@ import { RegionCard } from "./Section/ResionCard"
 
 export default function Destinations() {
   return (
-    <main className="flex-1">
+    <main className="flex-1 px-4">
       <HeroSection 
         title="Explore Destinations" 
         subtitle="Discover amazing vacation spots around the world."

@@ -26,7 +26,7 @@ export function PropertyReviews({ rating, reviews }: PropertyReviewsProps) {
         <div className="flex items-center">
           <Star className="h-5 w-5 fill-yellow-400 text-yellow-400 mr-1" />
           <span className="font-medium">{rating}</span>
-          <span className="text-muted-foreground ml-1">({reviews.length} reviews)</span>
+          <span className="text-muted-foreground ml-1">({reviews?.length || 3} reviews)</span>
         </div>
       </div>
 
@@ -42,11 +42,11 @@ export function PropertyReviews({ rating, reviews }: PropertyReviewsProps) {
         </TabsContent>
         
         <TabsContent value="positive" className="space-y-6">
-          {renderReviews(reviews.filter(r => r.rating >= 4))}
+          {renderReviews(reviews?.filter(r => r.rating >= 4))}
         </TabsContent>
         
         <TabsContent value="critical" className="space-y-6">
-          {renderReviews(reviews.filter(r => r.rating < 4))}
+          {renderReviews(reviews?.filter(r => r.rating < 4))}
         </TabsContent>
       </Tabs>
     </div>
@@ -54,7 +54,7 @@ export function PropertyReviews({ rating, reviews }: PropertyReviewsProps) {
 }
 
 function renderReviews(reviews: Review[]) {
-  return reviews.map((review, index) => (
+  return reviews?.map((review, index) => (
     <div key={index} className="border-b pb-6 last:border-0 last:pb-0">
       <div className="flex items-start mb-4">
         <div className="relative w-10 h-10 rounded-full overflow-hidden mr-4">
