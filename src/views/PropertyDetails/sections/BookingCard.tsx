@@ -206,6 +206,7 @@ import { cn } from "@/lib/utils"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { BooknowPopUp } from "@/components/common/Booknow"
 
 interface BookingCardProps {
   pricePerNight: number
@@ -284,7 +285,6 @@ export function BookingCard({
   }
 
   const handleBookNow = () => {
-    // Here you would typically send the booking data to your backend
     console.log('Booking confirmed!', {
       checkInDate,
       checkOutDate,
@@ -293,7 +293,6 @@ export function BookingCard({
       total
     })
     setIsDialogOpen(false)
-    // Reset form or redirect to confirmation page
   }
 
   return (
@@ -320,7 +319,7 @@ export function BookingCard({
                   <Button
                     variant="ghost"
                     className={cn(
-                      "w-full justify-start text-left font-normal border p-2 h-auto",
+                      "w-full justify-start text-left font-normal border p-2 hover:bg-primary h-auto",
                       !checkInDate && "text-muted-foreground"
                     )}
                   >
@@ -335,6 +334,7 @@ export function BookingCard({
                     onSelect={handleCheckInSelect}
                     disabled={{ before: today }}
                     initialFocus
+                    className="bg-white"
                   />
                 </PopoverContent>
               </Popover>
@@ -348,8 +348,8 @@ export function BookingCard({
                   <Button
                     variant="ghost"
                     className={cn(
-                      "w-full justify-start text-left font-normal border p-2 h-auto",
-                      !checkOutDate && "text-muted-foreground"
+                      "w-full justify-start text-left font-normal border p-2 hover:bg-primary h-auto",
+                      !checkOutDate && "text-muted-foreground "
                     )}
                     disabled={!checkInDate}
                   >
@@ -357,13 +357,14 @@ export function BookingCard({
                     {checkOutDate ? format(checkOutDate, "MMM dd") : "Add date"}
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
+                <PopoverContent className="w-auto p-0 " align="start">
                   <Calendar
                     mode="single"
                     selected={checkOutDate}
                     onSelect={handleCheckOutSelect}
                     disabled={{ before: checkInDate || today }}
                     initialFocus
+                     className="bg-white"
                   />
                 </PopoverContent>
               </Popover>
@@ -402,81 +403,14 @@ export function BookingCard({
           </div>
         </div>
 
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogTrigger asChild>
-            <Button 
-              className="w-full mb-4" 
-              disabled={!checkInDate || !checkOutDate}
-              onClick={handleReserveClick}
-            >
-              Reserve
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-            <DialogHeader>
-              <DialogTitle>Traveler Details</DialogTitle>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="firstName">First Name</Label>
-                  <Input
-                    id="firstName"
-                    name="firstName"
-                    value={travelerDetails.firstName}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="lastName">Last Name</Label>
-                  <Input
-                    id="lastName"
-                    name="lastName"
-                    value={travelerDetails.lastName}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={travelerDetails.email}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="phone">Phone Number</Label>
-                <Input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  value={travelerDetails.phone}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-              <div className="pt-4 border-t">
-                <div className="flex justify-between font-bold">
-                  <span>Total</span>
-                  <span>${total}</span>
-                </div>
-              </div>
-            </div>
-            <Button 
-              className="w-full" 
-              onClick={handleBookNow}
-              disabled={!isDetailsComplete}
-            >
-              Book Now
-            </Button>
-          </DialogContent>
-        </Dialog>
+        <BooknowPopUp
+          checkInDate={checkInDate}
+          checkOutDate={checkOutDate}
+          total={total}
+          onBookNow={handleBookNow}
+          isOpen={isDialogOpen}
+          onOpenChange={setIsDialogOpen}
+        />
 
         <p className="text-center text-sm text-muted-foreground mb-4">You won't be charged yet</p>
 
