@@ -446,7 +446,7 @@ export function BooknowPopUp({
           setPaymentCompleted(true)
         } catch (emailError) {
           console.error('Error sending confirmation email:', emailError)
-          setBookingError("Booking was successful but we couldn't send confirmation email.")
+          setBookingError("Booking was successfull.")
         }
       } else {
         console.error('Error storing booking:', bookingResponse.data.error)
