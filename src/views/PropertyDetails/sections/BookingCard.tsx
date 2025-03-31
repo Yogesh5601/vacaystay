@@ -223,6 +223,10 @@ interface TravelerDetails {
   phone: string
 }
 
+
+
+
+
 export function BookingCard({
   pricePerNight,
   rating,
@@ -284,16 +288,24 @@ export function BookingCard({
     setIsDialogOpen(true)
   }
 
-  const handleBookNow = () => {
-    console.log('Booking confirmed!', {
-      checkInDate,
-      checkOutDate,
-      guests,
-      travelerDetails,
-      total
-    })
-    setIsDialogOpen(false)
-  }
+  const handleBookNow = async (details: TravelerDetails) => {
+    try {
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: total * 100, // Convert to cents
+          travelerDetails: details
+        })
+      });
+      
+      const data = await response.json();
+      return data.clientSecret;
+    } catch (error) {
+      console.error('Error creating payment intent:', error);
+      return undefined;
+    }
+  };
 
   return (
     <Card className="sticky top-24">
