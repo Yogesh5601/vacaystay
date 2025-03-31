@@ -1,7 +1,6 @@
 'use client'
 
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table';
-import { Property } from '@/types';
 import { Button } from '@/components/ui/button';
 import { Pencil, Trash } from 'lucide-react';
 

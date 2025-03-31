@@ -1,4 +1,4 @@
-export const debounce = (func: Function, delay: number) => {
+export const debounce = (func: any, delay: number) => {
     let timer: NodeJS.Timeout;
     return (...args: any[]) => {
         clearTimeout(timer);
