@@ -49,7 +49,7 @@ export default function BookingPage() {
         <div className="max-w-5xl mx-auto">
           <div className="mb-8">
             <h1 className="text-3xl font-bold mb-2">Complete Your Booking</h1>
-            <p className="text-muted-foreground">You're just a few steps away from your dream vacation.</p>
+            <p className="text-muted-foreground">You&apos;re just a few steps away from your dream vacation.</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -339,7 +339,7 @@ export default function BookingPage() {
                   </CardContent>
                   <CardFooter>
                     <p className="text-xs text-muted-foreground">
-                      You won't be charged until you complete your booking.
+                      You won&apos;t be charged until you complete your booking.
                     </p>
                   </CardFooter>
                 </Card>

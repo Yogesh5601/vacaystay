@@ -1,7 +1,7 @@
 // components/Hero.tsx
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { MapPin, Search, ChevronDown, ChevronUp } from "lucide-react";
+import { MapPin, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DateRange } from "react-day-picker";
@@ -59,7 +59,7 @@ export default function Hero() {
     
     setIsLoading(true);
     try {
-      const response = await axios.get("/api/search-property", {
+      await axios.get("/api/search-property", {
         params: { 
           query: destination,
           startDate: dates?.from?.toISOString(),
@@ -179,6 +179,7 @@ export default function Hero() {
               <label className="text-sm font-medium block">Travelers</label>
               <GuestSelector
                 adults={guestDetails.adults}
+                // eslint-disable-next-line react/no-children-prop
                 children={guestDetails.children}
                 pets={guestDetails.pets}
                 onChange={setGuestDetails}

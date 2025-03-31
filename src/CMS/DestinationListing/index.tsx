@@ -6,12 +6,12 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Plus, Search, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Plus, Search} from 'lucide-react';
 import Link from 'next/link';
 import Loader from '@/components/common/Loader';
 import { DestinationTable } from '@/components/common/DestinationListingTable';
 import { debounce } from '@/utils/globalfunctions';
-import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Pagination } from '@/components/common/Pagination';
 
 export default function DestinationListings() {

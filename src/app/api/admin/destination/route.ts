@@ -92,10 +92,10 @@ export async function GET(request: NextRequest) {
         pagination: { total, page, limit },
       },
     });
-  } catch (error: any) {
+  } catch (error:any) {
+    console.error("Error fetching destination:", error);
     return NextResponse.json(
-      { success: false, error: error.message, message: "Failed to fetch rentals" },
-      { status: 500 }
+      { success: false, error: error.message, message: "Failed to fetch rentals" }
     );
   }
 }

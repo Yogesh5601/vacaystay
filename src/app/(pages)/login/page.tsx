@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { signIn } from "next-auth/react"
 import Link from "next/link"
-import { Loader2, Eye, EyeOff, ArrowRight, CheckCircle2 } from "lucide-react"
+import { Loader, Eye, EyeOff, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -83,7 +83,7 @@ export default function LoginPage() {
                   <Label htmlFor="remember-me">Remember me</Label>
                 </div>
                 <Button type="submit" disabled={loading} className="w-full">
-                  {loading ? (<><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Signing in...</>) : (<>Sign in <ArrowRight className="ml-2 h-5 w-5" /></>)}
+                  {loading ? (<><Loader className="mr-2 h-5 w-5 animate-spin" /> Signing in...</>) : (<>Sign in <ArrowRight className="ml-2 h-5 w-5" /></>)}
                 </Button>
               </form>
             </CardContent>

@@ -15,8 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Trash2, ImagePlus } from "lucide-react";
-import { uploadImagesFunction } from "@/lib/uploadFiles";
+import { ImagePlus } from "lucide-react";
 
 // Form validation schema
 const formSchema = z.object({
@@ -42,7 +41,6 @@ const categories = [
 export default function AddDestination() {
     const [coverImage, setCoverImage] = useState<File | null>(null);
     const [coverImageUrl, setCoverImageUrl] = useState<string>("");
-    const [selectedImages, setSelectedImages] = useState<File[]>([]);
     const [uploadedImageUrls, setUploadedImageUrls] = useState<string[]>([]);
     const [isUploading, setIsUploading] = useState(false);
     const coverImageRef = useRef<HTMLInputElement>(null);
@@ -110,14 +108,13 @@ export default function AddDestination() {
                 images: uploadedImageUrls,
             };
 
-            const response = await axios.post('/api/admin/destination', destinationData);
+           await axios.post('/api/admin/destination', destinationData);
             toast.success("Destination added successfully!");
 
             // Reset form
             form.reset();
             setCoverImage(null);
             setCoverImageUrl("");
-            setSelectedImages([]);
             setUploadedImageUrls([]);
 
         } catch (error) {

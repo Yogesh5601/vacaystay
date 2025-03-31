@@ -4,6 +4,7 @@ import { CtaSection } from "./Section/CtaSection";
 import { HeroSection } from "./Section/HeroSection";
 import { TeamSection } from "./Section/TeamSection";
 import { ValuesSection } from "./Section/ValuesSection";
+import { JSX, SVGProps } from "react";
 
 
 export default function AboutUs() {
@@ -68,7 +69,7 @@ const values = [
     title: "Quality & Trust",
     description:
       "We carefully vet all properties to ensure they meet our high standards for quality, comfort, and accuracy.",
-    icon: (props: any) => (
+    icon: (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -89,7 +90,7 @@ const values = [
   {
     title: "Exceptional Service",
     description: "Our dedicated support team is available 24/7 to assist both travelers and property owners.",
-    icon: (props: any) => (
+    icon: (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -109,7 +110,7 @@ const values = [
   {
     title: "Transparency",
     description: "We believe in clear, upfront pricing with no hidden fees or surprises.",
-    icon: (props: any) => (
+    icon: (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -132,7 +133,7 @@ const values = [
     title: "Community",
     description:
       "We foster connections between travelers and hosts, creating a global community of like-minded individuals.",
-    icon: (props: any) => (
+    icon: (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -156,7 +157,7 @@ const values = [
     title: "Innovation",
     description:
       "We continuously improve our platform to make finding and booking vacation rentals easier and more enjoyable.",
-    icon: (props: any) => (
+    icon: (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -183,7 +184,7 @@ const values = [
   {
     title: "Sustainability",
     description: "We're committed to promoting sustainable travel practices and supporting eco-friendly properties.",
-    icon: (props: any) => (
+    icon: (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"

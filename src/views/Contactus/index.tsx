@@ -33,7 +33,7 @@ const Contactus = () => {
           <div id="contact-form">
             <h2 className="text-3xl font-bold tracking-tight mb-6">Get in Touch</h2>
             <p className="text-muted-foreground mb-8">
-              Have questions about a property, booking, or anything else? We're here to help! Fill out the form and
+              Have questions about a property, booking, or anything else? We&apos;re here to help! Fill out the form and
               our team will get back to you as soon as possible.
             </p>
 

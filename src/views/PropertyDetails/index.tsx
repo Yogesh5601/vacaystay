@@ -1,14 +1,10 @@
 "use client"
-
-import { use } from "react"
 import { PropertyHeader } from "./sections/PropertyHeader"
 import { PropertyGallery } from "./sections/PropertyGallery"
 import { PropertyHostInfo } from "./sections/PropertyHostInfo"
 import { PropertyDescription } from "./sections/PropertyDescription"
 import { PropertyAmenities } from "./sections/PropertyAmenities"
 import { BookingCard } from "./sections/BookingCard"
-import { PropertyLocation } from "./sections/PropertyLocation"
-import { PropertyReviews } from "./sections/PropertyReviews"
 
 
 export default function PropertyDetail({property}:any) {

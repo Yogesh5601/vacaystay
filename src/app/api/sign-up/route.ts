@@ -14,7 +14,7 @@ export async function POST(req: Request) {
     // Validate input
     if (!email || !password || !name) {
       return NextResponse.json(
-        { error: "Missing required fields" }, 
+        { error: "Missing required fields",  success:false, }, 
         { status: 400 }
       );
     }
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return NextResponse.json(
-        { error: "User already exists" }, 
+        { error: "User already exists",  success:false, }, 
         { status: 400 }
       );
     }
@@ -44,11 +44,11 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json(
-      { message: "User registered successfully", user: newUser }, 
+      { message: "User registered successfully", user: newUser,  success:true, }, 
       { status: 201 }
     );
 
-  } catch (error: any) {
+  } catch (error) {
     // Cleanup Firebase user if MongoDB save failed
     if (firebaseUser) {
       try {
@@ -63,10 +63,10 @@ export async function POST(req: Request) {
     
     return NextResponse.json(
       { 
+        success:false,
         error: "Internal Server Error",
-        details: error.message 
-      }, 
-      { status: 500 }
+        details: error 
+      }
     );
   }
 }

@@ -1,7 +1,7 @@
 'use client'
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Plus, ChevronLeft, ChevronRight, Search } from 'lucide-react';
+import { Plus,Search } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';

@@ -1,11 +1,7 @@
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
-import Image from "next/image"
+import React from 'react'
 import { PropertyCard } from '@/components/common/PropertyCard'
-import { featuredProperties } from '@/data'
-import axios from 'axios'
 
 
 const FeaturedProperties = ({properties}:any) => {

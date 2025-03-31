@@ -1,4 +1,3 @@
-import Properties, { IProperties } from "@/models/Properties";
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/db";
 import Destinations from "@/models/Destinations";
@@ -34,9 +33,9 @@ export async function GET(request: NextRequest) {
       data
     }
     return NextResponse.json({ success: true, result })
-  } catch (error: any) {
+  } catch (error) {
     return NextResponse.json(
-      { success: false, error: error.message, message: 'Failed to fetch rentals' }
+      { success: false, error: error, message: 'Failed to fetch rentals' }
     )
   }
 }

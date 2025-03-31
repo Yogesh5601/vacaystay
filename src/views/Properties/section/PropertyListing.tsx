@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { PropertyCard } from "@/components/common/PropertyCard";
 import { Pagination } from "@/components/common/Pagination";

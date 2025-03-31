@@ -16,7 +16,7 @@ export async function POST(request: Request) {
             );
         }
 
-        dbConnect
+        await dbConnect
         const user = await User.findOne({ email });
 
         if (!user) {
@@ -58,10 +58,10 @@ export async function POST(request: Request) {
 
         return NextResponse.json({ success: true, result });
 
-    } catch (error: any) {
+    } catch (error) {
         console.error('Login error:', error);
         return NextResponse.json(
-            { success: false, error: error.message, message: 'Internal server error' }
+            { success: false, error: error, message: 'Internal server error' }
         );
     }
 }

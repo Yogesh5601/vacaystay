@@ -1,16 +1,14 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { Globe } from "lucide-react"
-import { destinations, featuredDestinations } from '@/data'
 import Link from "next/link"
 import { HeroSection } from "./Section/HeroSection"
 import { DestinationCard } from "./Section/DestinationCard"
 import { DestinationGrid } from "./Section/DestinationGrid"
-import { Pagination } from "@/components/common/Pagination"
 
 const categoryFilters = ["all", "beach", "mountain", "city", "countryside"]
 
-const Destinations = ({ destinations, page, setPage, totalPages }: any) => {
+const Destinations = ({ destinations}: any) => {
   console.log(destinations,"data")
   return (
     <main className="flex-1 px-4 py-6">

@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -25,7 +24,7 @@ export const ContactForm = ({ onSubmit, onReset, submitted }: ContactFormProps) 
             </div>
             <h3 className="text-xl font-bold mb-2">Message Sent!</h3>
             <p className="text-muted-foreground mb-4">
-              Thank you for contacting us. We'll get back to you as soon as possible.
+              Thank you for contacting us. We&apos;ll get back to you as soon as possible.
             </p>
             <Button onClick={onReset}>Send Another Message</Button>
           </div>

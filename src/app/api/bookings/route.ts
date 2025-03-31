@@ -9,6 +9,7 @@ export async function POST(req: Request) {
     const booking = await Booking.create(data);
     return NextResponse.json(booking, { status: 201 });
   } catch (error) {
+    console.log("error:", error)
     return NextResponse.json({ error: "Booking failed" }, { status: 500 });
   }
 }

@@ -5,18 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { MapPin } from "lucide-react"
 
-// components/destination-card.tsx
-interface Destination {
-  id: string | number
-  name: string
-  region: string
-  description: string
-  propertyCount: number
-  priceFrom: number
-  image?: string
-  featured?: boolean
-  type?: string
-}
+
 
 export const DestinationCard = ({ destination, variant = 'default' }:any) => {
 

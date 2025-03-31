@@ -11,7 +11,6 @@ import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { AlertCircle, ArrowRight, Eye, EyeOff, Loader } from "lucide-react"
 import Link from "next/link"
-import Image from "next/image"
 import useRedirectIfAuthenticated from "@/lib/useRedirectIfAuthenticated"
 
 export default function SignUpPage() {

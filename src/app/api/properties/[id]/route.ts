@@ -13,15 +13,15 @@ export async function GET(
     
     if (!properties) {
       return NextResponse.json(
-        { error: 'properties not found' },
+        {success:false, error: 'properties not found' },
         { status: 404 }
       )
     }
     
-    return NextResponse.json(response)
+    return NextResponse.json({response, success:true})
   } catch (error) {
     return NextResponse.json(
-      { error: 'Failed to fetch properties' },
+      {success:false, message: 'Failed to fetch properties' ,error },
       { status: 500 }
     )
   }
@@ -42,10 +42,10 @@ export async function PUT(
       { new: true }
     )
     
-    return NextResponse.json(response)
+    return NextResponse.json({response, success:true})
   } catch (error) {
     return NextResponse.json(
-      { error: 'Failed to update properties' },
+      { message: 'Failed to update properties' , error},
       { status: 500 }
     )
   }
@@ -65,7 +65,7 @@ export async function DELETE(
     )
   } catch (error) {
     return NextResponse.json(
-      { error: 'Failed to delete properties' },
+      { message: 'Failed to delete properties', error },
       { status: 500 }
     )
   }

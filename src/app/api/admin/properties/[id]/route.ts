@@ -13,16 +13,15 @@ export async function GET(
     
     if (!properties) {
       return NextResponse.json(
-        { error: 'properties not found' },
-        { status: 404 }
+        { success:false, error: 'properties not found' }
       )
     }
     
-    return NextResponse.json(response)
+    return NextResponse.json({success:true, response})
   } catch (error) {
+    console.log("error fetch property:", error)
     return NextResponse.json(
-      { error: 'Failed to fetch properties' },
-      { status: 500 }
+      {success:false, error: 'Failed to fetch properties' }
     )
   }
 }
@@ -42,11 +41,11 @@ export async function PUT(
       { new: true }
     )
     
-    return NextResponse.json(response)
+    return NextResponse.json({response, success:true})
   } catch (error) {
+    console.log("error update property:", error)
     return NextResponse.json(
-      { error: 'Failed to update properties' },
-      { status: 500 }
+      {success:false, error: 'Failed to update properties' }
     )
   }
 }
@@ -61,12 +60,12 @@ export async function DELETE(
     await properties.findByIdAndDelete(params.id)
     
     return NextResponse.json(
-      { message: 'properties deleted successfully' }
+      { success:true,message: 'properties deleted successfully' }
     )
   } catch (error) {
+    console.log("error delete property:", error)
     return NextResponse.json(
-      { error: 'Failed to delete properties' },
-      { status: 500 }
+      {success:false, error: 'Failed to delete properties' }
     )
   }
 }

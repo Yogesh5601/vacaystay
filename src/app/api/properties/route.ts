@@ -39,9 +39,9 @@ export async function GET(request: NextRequest) {
       },
     }
     return NextResponse.json({ success: true, result })
-  } catch (error: any) {
+  } catch (error) {
     return NextResponse.json(
-      { success: false, error: error.message, message: 'Failed to fetch rentals' }
+      { success: false, error: error, message: 'Failed to fetch rentals' }
     )
   }
 }
@@ -82,28 +82,12 @@ export async function POST(req: Request) {
     await property.save();
 
     const responseData = property.toObject();
-    return NextResponse.json(responseData, { status: 201 });
+    return NextResponse.json({ success: true, responseData });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error creating property:", error);
-
-    if (error.name === 'ValidationError') {
-      return NextResponse.json(
-        { error: "Validation failed", details: error.errors },
-        { status: 400 }
-      );
-    }
-
-    if (error.code === 11000) {
-      return NextResponse.json(
-        { error: "Property with similar unique properties already exists" },
-        { status: 409 }
-      );
-    }
-
     return NextResponse.json(
-      { error: "Failed to create property", details: error.message },
-      { status: 500 }
+      {success:false,  message: "Failed to create property", error }
     );
   }
 }

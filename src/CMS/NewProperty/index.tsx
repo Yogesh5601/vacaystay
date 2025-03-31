@@ -12,7 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import axios from "axios";
 import { toast } from "sonner";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Ghost } from "lucide-react";
+
 
 const propertyTypes = [
   "Apartment", "House", "Villa", "Cabin", "Cottage", "Condominium", "Beach House", "Loft", "Farm Stay", "Other"
