@@ -6,12 +6,12 @@ import { Button } from '@/components/ui/button';
 import { Pencil, Trash } from 'lucide-react';
 
 interface PropertyTableProps {
-    properties: Property[];
+    properties: any[];
     onDelete: (id: string) => void;
-    onEdit: (property: Property) => void;
+    onEdit: (property: any) => void;
 }
 
-export function PropertyTable({ properties, onDelete, onEdit }: any) {
+export function PropertyTable({ properties, onDelete, onEdit }: PropertyTableProps) {
     return (
         <Table>
             <TableHeader>

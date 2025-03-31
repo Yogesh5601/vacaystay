@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { MapPin, Star } from 'lucide-react'
-import { Property } from '@/types'
 
 interface PropertyCardProps {
   property: any

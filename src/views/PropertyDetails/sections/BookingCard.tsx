@@ -203,9 +203,6 @@ import { format } from "date-fns"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Calendar } from "@/components/ui/calendar"
 import { cn } from "@/lib/utils"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { BooknowPopUp } from "@/components/common/Booknow"
 
 interface BookingCardProps {
@@ -224,9 +221,6 @@ interface TravelerDetails {
 }
 
 
-
-
-
 export function BookingCard({
   pricePerNight,
   rating,
@@ -238,12 +232,12 @@ export function BookingCard({
   const [checkInDate, setCheckInDate] = useState<Date | undefined>()
   const [checkOutDate, setCheckOutDate] = useState<Date | undefined>()
   const [openPicker, setOpenPicker] = useState<'checkIn' | 'checkOut' | null>(null)
-  const [travelerDetails, setTravelerDetails] = useState<TravelerDetails>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: ''
-  })
+  // const [travelerDetails, setTravelerDetails] = useState<TravelerDetails>({
+  //   firstName: '',
+  //   lastName: '',
+  //   email: '',
+  //   phone: ''
+  // })
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   const today = new Date()
@@ -262,13 +256,13 @@ export function BookingCard({
     setOpenPicker(null)
   }
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setTravelerDetails(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target
+  //   setTravelerDetails(prev => ({
+  //     ...prev,
+  //     [name]: value
+  //   }))
+  // }
 
   const nights = checkInDate && checkOutDate ? 
     Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24)) : 
@@ -277,16 +271,16 @@ export function BookingCard({
   const total = subtotal + cleaningFee + serviceFee
 
   // Check if all traveler details are filled
-  const isDetailsComplete = (
-    travelerDetails.firstName.trim() &&
-    travelerDetails.lastName.trim() &&
-    travelerDetails.email.trim() &&
-    travelerDetails.phone.trim()
-  )
+  // const isDetailsComplete = (
+  //   travelerDetails.firstName.trim() &&
+  //   travelerDetails.lastName.trim() &&
+  //   travelerDetails.email.trim() &&
+  //   travelerDetails.phone.trim()
+  // )
 
-  const handleReserveClick = () => {
-    setIsDialogOpen(true)
-  }
+  // const handleReserveClick = () => {
+  //   setIsDialogOpen(true)
+  // }
 
   const handleBookNow = async (details: TravelerDetails) => {
     try {
@@ -424,7 +418,7 @@ export function BookingCard({
           onOpenChange={setIsDialogOpen}
         />
 
-        <p className="text-center text-sm text-muted-foreground mb-4">You won't be charged yet</p>
+        <p className="text-center text-sm text-muted-foreground mb-4">You won&apos;t be charged yet</p>
 
         <div className="space-y-4">
           {nights > 0 && (

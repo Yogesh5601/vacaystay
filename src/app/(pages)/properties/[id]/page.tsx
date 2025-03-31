@@ -30,7 +30,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ id: s
           throw new Error(response.data.error);
         }
         
-        setRental(response.data);
+        setRental(response.data.response);
         setError(null);
       } catch (error) {
         console.error('Error fetching rental:', error);

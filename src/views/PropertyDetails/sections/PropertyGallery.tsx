@@ -13,6 +13,7 @@ interface PropertyGalleryProps {
 }
 
 export function PropertyGallery({ coverImage, images, title }: PropertyGalleryProps) {
+  console.log(coverImage,'imges')
   const [isGalleryOpen, setIsGalleryOpen] = useState(false)
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
 

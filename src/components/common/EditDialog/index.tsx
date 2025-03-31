@@ -27,7 +27,7 @@ interface EditDialogProps {
 }
 
 export function EditDialog({ open, onOpenChange, property, onSuccess }: EditDialogProps) {
-    const { register, handleSubmit, setValue, watch } = useForm();
+    const { register, handleSubmit, setValue } = useForm();
     const [coverImage, setCoverImage] = useState<File | null>(null);
     const [coverImageUrl, setCoverImageUrl] = useState<string | null>(null);
     const [selectedImages, setSelectedImages] = useState<File[]>([]);
@@ -157,7 +157,7 @@ export function EditDialog({ open, onOpenChange, property, onSuccess }: EditDial
                 <DialogHeader>
                     <DialogTitle>Edit Property</DialogTitle>
                     <DialogDescription>
-                        Make changes to your property here. Click save when you're done.
+                        Make changes to your property here. Click save when you&apos;re done.
                     </DialogDescription>
                 </DialogHeader>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">

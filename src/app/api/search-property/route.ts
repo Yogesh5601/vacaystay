@@ -1,4 +1,4 @@
-import Properties, { IProperties } from "@/models/Properties";
+import Properties from "@/models/Properties";
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/db";
 

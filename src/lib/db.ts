@@ -1,30 +1,3 @@
-// import { MongoClient } from "mongodb";
-
-// const uri = process.env.MONGODB_URI;
-
-// if (!uri) {
-//   throw new Error('Invalid/Missing environment variable: "MONGODB_URI"');
-// }
-
-// let client: MongoClient;
-// let clientPromise: Promise<MongoClient>;
-
-// try {
-//   client = new MongoClient(uri);
-//   clientPromise = client.connect();
-  
-//   clientPromise.catch((error) => {
-//     console.error("MongoDB connection error:", error);
-//     process.exit(1); // Exit the process on connection failure
-//   });
-
-// } catch (error) {
-//   console.error("MongoDB initialization error:", error);
-//   throw new Error("Failed to initialize MongoDB client");
-// }
-
-// export default clientPromise;
-
 // lib/db.ts
 import mongoose from 'mongoose';
 
@@ -35,7 +8,7 @@ if (!MONGODB_URI) {
 }
 
 declare global {
-  var mongoose: any;
+  let mongoose: any;
 }
 
 let cached = global.mongoose;

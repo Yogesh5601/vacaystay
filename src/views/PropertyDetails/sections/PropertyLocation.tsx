@@ -1,7 +1,6 @@
 "use client"
 
 import Image from "next/image"
-import { MapPin } from "lucide-react"
 
 interface PropertyLocationProps {
   location: string

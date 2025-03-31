@@ -1,5 +1,5 @@
 // components/DateRangePicker.tsx
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CalendarIcon } from "lucide-react";
 import { format, isBefore, isSameDay } from "date-fns";
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,6 @@ import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
 import { DateRange } from "react-day-picker";
-import axios from "axios";
 
 interface DateRangePickerProps {
   className?: string;
