@@ -8,7 +8,6 @@ import { BookingCard } from "./sections/BookingCard"
 
 
 export default function PropertyDetail({property}:any) {
-  console.log(property,"propertyproperty")
   return (
     <main className="flex-1">
     <div className="container py-8">

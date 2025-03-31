@@ -4,7 +4,6 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { getServerSession } from "next-auth"
 import SignOutButton from '@/components/common/Buttons/SignOutButton';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { Menu, User } from 'lucide-react';
 import {
   DropdownMenu,
@@ -12,6 +11,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { authOptions } from '@/lib/auth'
 
 const Header = async () => {
   const session = await getServerSession(authOptions)

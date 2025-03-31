@@ -13,13 +13,26 @@ import axios from "axios";
 import { toast } from "sonner";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
+interface PropertyFormData {
+  title: string;
+  location: string;
+  description: string;
+  pricePerNight: number;
+  cleaningFee: number;
+  serviceFee: number;
+  propertyType: string;
+  beds: number;
+  baths: number;
+  maxGuests: number;
+  amenities: string[];
+}
 
 const propertyTypes = [
   "Apartment", "House", "Villa", "Cabin", "Cottage", "Condominium", "Beach House", "Loft", "Farm Stay", "Other"
 ];
 
 export default function AddProperty() {
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit } = useForm<PropertyFormData>({
     defaultValues: {
       title: "",
       location: "",
@@ -359,7 +372,6 @@ export default function AddProperty() {
                   id="maxGuests"
                   {...register("maxGuests")}
                   type="number"
-                  value={register.maxGuests}
                   className="p-3 border rounded-md"
                 />
               </div>

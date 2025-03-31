@@ -25,12 +25,11 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ id: s
       try {
         setLoading(true);
         const response = await axios.get(`/api/properties/${id}`);
-        
         if (response.data.error) {
           throw new Error(response.data.error);
         }
         
-        setRental(response.data.response);
+        setRental(response.data.property);
         setError(null);
       } catch (error) {
         console.error('Error fetching rental:', error);

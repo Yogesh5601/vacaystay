@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 import bcrypt from 'bcryptjs';
 import dbConnect from '@/lib/db';
 import User from '@/models/User';
+import { authOptions } from '@/lib/auth';
 
 export async function POST(request: Request) {
     try {

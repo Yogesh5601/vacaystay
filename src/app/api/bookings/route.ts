@@ -5,9 +5,24 @@ import Booking from "@/models/Booking";
 export async function POST(req: Request) {
   try {
     await connectDB();
-    const data = await req.json();
-    const booking = await Booking.create(data);
-    return NextResponse.json(booking, { status: 201 });
+    const { checkIn, checkOut, guests, totalPrice, userId, propertyId } = await req.json();
+
+    if (!checkIn || !checkOut || !guests || !totalPrice || !userId || !propertyId) {
+      return NextResponse.json({ error: "All fields are required" }, { status: 400 });
+    }
+
+
+    const newBooking = new Booking({
+      checkIn,
+      checkOut,
+      guests,
+      totalPrice,
+      userId,
+      propertyId,
+      createdAt: new Date(),
+    });
+
+    await newBooking.save();
   } catch (error) {
     console.log("error:", error)
     return NextResponse.json({ error: "Booking failed" }, { status: 500 });

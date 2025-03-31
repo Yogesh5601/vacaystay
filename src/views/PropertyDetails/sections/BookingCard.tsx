@@ -232,12 +232,6 @@ export function BookingCard({
   const [checkInDate, setCheckInDate] = useState<Date | undefined>()
   const [checkOutDate, setCheckOutDate] = useState<Date | undefined>()
   const [openPicker, setOpenPicker] = useState<'checkIn' | 'checkOut' | null>(null)
-  // const [travelerDetails, setTravelerDetails] = useState<TravelerDetails>({
-  //   firstName: '',
-  //   lastName: '',
-  //   email: '',
-  //   phone: ''
-  // })
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   const today = new Date()
@@ -256,31 +250,12 @@ export function BookingCard({
     setOpenPicker(null)
   }
 
-  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target
-  //   setTravelerDetails(prev => ({
-  //     ...prev,
-  //     [name]: value
-  //   }))
-  // }
 
   const nights = checkInDate && checkOutDate ? 
     Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24)) : 
     0
   const subtotal = nights * pricePerNight
   const total = subtotal + cleaningFee + serviceFee
-
-  // Check if all traveler details are filled
-  // const isDetailsComplete = (
-  //   travelerDetails.firstName.trim() &&
-  //   travelerDetails.lastName.trim() &&
-  //   travelerDetails.email.trim() &&
-  //   travelerDetails.phone.trim()
-  // )
-
-  // const handleReserveClick = () => {
-  //   setIsDialogOpen(true)
-  // }
 
   const handleBookNow = async (details: TravelerDetails) => {
     try {
@@ -415,8 +390,7 @@ export function BookingCard({
           total={total}
           onBookNow={handleBookNow}
           isOpen={isDialogOpen}
-          onOpenChange={setIsDialogOpen}
-        />
+          onOpenChange={setIsDialogOpen} propertyId={""} propertyTitle={""} propertyImage={""} basePrice={0} taxes={0} serviceFee={0}        />
 
         <p className="text-center text-sm text-muted-foreground mb-4">You won&apos;t be charged yet</p>
 

@@ -1,7 +1,7 @@
 
 // import { MailPayload } from '../types/interviewTypes'
 
-const bookingmail = (data: { name: string; otp: string }) => {
+export const bookingmail = (data: any) => {
     return `
   <!DOCTYPE html>
   <html lang="en">
@@ -70,6 +70,3 @@ const bookingmail = (data: { name: string; otp: string }) => {
     `;
   }
 
-export default{
-    bookingmail,
-}
