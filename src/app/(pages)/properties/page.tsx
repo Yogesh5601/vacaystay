@@ -34,7 +34,6 @@ export default function PropertiesPage() {
     fetchProducts();
   }, []);
 
-  // console.log(products, "productsproductsproducts")
   return (
     <div className="flex flex-col min-h-screen px-4 container mx-auto">
       <Properties featuredProperties={products}/>

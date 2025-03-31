@@ -44,9 +44,9 @@ export default function PropertyDetail({property}:any) {
           <BookingCard
             pricePerNight={property.pricePerNight}
             rating={property.rating || 3}
-            maxGuests={property.maxGuests ||5}
-            cleaningFee={property.cleaningFee || 20}
-            serviceFee={property.serviceFee || 30}
+            maxGuests={property.maxGuests || 2}
+            cleaningFee={property.cleaningFee || 0}
+            serviceFee={property.serviceFee || 0}
           />
         </div>
       </div>

@@ -10,7 +10,6 @@ interface PropertyCardProps {
 }
 
 export const PropertyCard = ({ property }: PropertyCardProps) => {
-  console.log(property,"property._id")
   return (
     <Link href={`/properties/${property._id}`} className="group">
       <Card className="overflow-hidden transition-all duration-300 group-hover:shadow-lg h-full flex flex-col p-0">
