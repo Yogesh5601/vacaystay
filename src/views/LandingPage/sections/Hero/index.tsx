@@ -83,14 +83,16 @@ export default function Hero() {
     }
   };
 
-  const handleSuggestionClick = (suggestion: Suggestion) => {
-    setDestination(suggestion.location); // Use suggestion.location instead of suggestion.name
+  const handleSuggestionClick = (suggestion: any) => {
+    setDestination(suggestion.name);
     setShowSuggestions(false);
   };
 
   const toggleSuggestions = () => {
     setShowSuggestions(!showSuggestions);
   };
+
+console.log(destination,showSuggestions,"destinationdestinationdestination")
 
   return (
     <section className="relative w-full flex flex-col justify-center px-4">
