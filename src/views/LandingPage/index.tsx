@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Hero from './sections/Hero'
 import CallToActiion from './sections/CallToAction'
 import Testimanial from './sections/Testimonials'
@@ -7,14 +7,15 @@ import PopularDestination from './sections/PopularDestination'
 import WhyChoose from './sections/WhyChoose'
 
 
-
 const LandingPage = () => {
+
+ 
   return (
     <main className="space-y-4 w-full">
       <Hero />
       <PopularDestination />
       <FeaturedProperties />
-      <WhyChoose />
+      <WhyChoose />     
       <Testimanial />
       <CallToActiion />
     </main>
