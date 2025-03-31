@@ -16,6 +16,8 @@ export function PropertyAmenities({ amenities }: PropertyAmenitiesProps) {
             <Check className="h-5 w-5 mr-2 text-primary" />
             <span>{amenity}</span>
           </div>
+
+          
         ))}
       </div>
     </div>
