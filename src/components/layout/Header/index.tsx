@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { getServerSession } from "next-auth"
 import SignOutButton from '@/components/common/Buttons/SignOutButton';
@@ -28,7 +29,7 @@ const Header = async () => {
                 <Menu className="h-5 w-5" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-56 bg-white/90 hover:bg-white focus:bg-white">
+            <DropdownMenuContent align="start" className="w-56 bg-white shadow-md">
               <DropdownMenuItem asChild>
                 <Link href="/properties">Properties</Link>
               </DropdownMenuItem>
@@ -50,7 +51,7 @@ const Header = async () => {
           </DropdownMenu>
 
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-xl font-bold">VacayStay</span>
+          <span className="text-xl font-bold">VacayStay</span>
           </Link>
         </div>
 
@@ -79,7 +80,7 @@ const Header = async () => {
                     <User className="h-5 w-5" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48 bg-white/90 hover:bg-white focus:bg-white">
+                <DropdownMenuContent align="end" className="w-48 bg-white shadow-md">
                   <DropdownMenuItem asChild>
                     <Link href="/dashboard" className="w-full">Dashboard</Link>
                   </DropdownMenuItem>
@@ -91,9 +92,11 @@ const Header = async () => {
 
               <Link href="/dashboard" className="hidden md:flex items-center gap-2 text-sm font-medium hover:underline underline-offset-4 transition-colors hover:text-primary">
                 {user?.image ? (
-                  <img 
+                  <Image 
                     src={user.image} 
                     alt="Profile" 
+                    width={32}
+                    height={32}
                     className="h-8 w-8 rounded-full"
                   />
                 ) : (

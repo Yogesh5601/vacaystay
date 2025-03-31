@@ -1,21 +1,28 @@
-import React from "react";
+import React from 'react';
+import { PropagateLoader } from 'react-spinners';
 
-type LoaderProps = {
-  loading: boolean;
+const Loader = ({ loading, size, color }: any) => {
+    return (
+        <div>
+            {loading && (
+                <div className="fixed inset-0 z-50 bg-white bg-opacity-80"></div>
+            )}
+            <div className={`absolute inset-0 flex justify-center items-center ${loading ? 'z-10' : 'z-[-10]'}`}>
+                <PropagateLoader
+                    color={color}
+                    loading={loading}
+                    size={size}
+                    aria-label="Loading Spinner"
+                />
+            </div>
+        </div>
+    );
 };
 
-const Loader: React.FC<LoaderProps> = ({ loading }) => {
-  if (!loading) return null;
-
-  return (
-    <div className="fixed inset-0 z-40 flex items-center justify-center w-full h-screen bg-white/50">
-      <div className="sk-fading-circle">
-        {Array.from({ length: 12 }).map((_, index) => (
-          <div key={index} className={`sk-circle${index + 1} sk-circle`}></div>
-        ))}
-      </div>
-    </div>
-  );
+Loader.defaultProps = {
+    loading: true,
+    size: 20,
+    color: '#fffff', // Blue color
 };
 
-export default Loader;
+export default React.memo(Loader);

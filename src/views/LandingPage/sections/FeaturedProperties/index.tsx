@@ -8,30 +8,9 @@ import { featuredProperties } from '@/data'
 import axios from 'axios'
 
 
-const FeaturedProperties = () => {
-
-  const [properties, setProperties] = useState([]);
-  const [loading, setLoading] = useState(true);
+const FeaturedProperties = ({properties}:any) => {
 
 
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get('/api/properties');
-        setProperties(response.data.result.data.slice(0, 4));
-     
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
-  console.log(properties,"properties")
   
   return (
     <section className=" py-12 px-4  md:py-16 w-full flex justify-center">

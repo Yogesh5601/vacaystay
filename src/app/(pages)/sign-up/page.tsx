@@ -1,118 +1,188 @@
-"use client";
+"use client"
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import type React from "react"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+import axios from "axios"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Label } from "@/components/ui/label"
+import { Alert, AlertDescription } from "@/components/ui/alert"
+import { AlertCircle, ArrowRight, Eye, EyeOff, Loader } from "lucide-react"
+import Link from "next/link"
+import Image from "next/image"
+import useRedirectIfAuthenticated from "@/lib/useRedirectIfAuthenticated"
 
 export default function SignUpPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [error, setError] = useState("");
-  const router = useRouter();
+
+  useRedirectIfAuthenticated();
+  
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [name, setName] = useState("")
+  const [error, setError] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
+  const router = useRouter()
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword)
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
+    e.preventDefault()
+    setError("")
+    setIsLoading(true)
 
     try {
-        console.log("clecked")
-      const response = await fetch("/api/sign-up", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password, name }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Sign up failed");
-      }
+      await axios.post("/api/sign-up", {
+        email,
+        password,
+        name
+      })
 
       // Redirect to login after successful signup
-      router.push("/login");
+      router.push("/login")
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred");
+      if (axios.isAxiosError(err)) {
+        setError(err.response?.data?.message || "Sign up failed")
+      } else {
+        setError(err instanceof Error ? err.message : "An error occurred")
+      }
+    } finally {
+      setIsLoading(false)
     }
-  };
+  }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Create your account
-        </h2>
-        {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
-            {error}
-          </div>
-        )}
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded-md shadow-sm space-y-4">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                Name
-              </label>
-              <input
+    <div className="h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-amber-50 p-4">
+      {/* Vacation-themed background elements */}
+      <div className="fixed inset-0 overflow-hidden opacity-10">
+        <img
+          src="data:image/svg+xml;charset=UTF-8,<?xml version='1.0' encoding='UTF-8'?><svg version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 100'><text x='10' y='60' font-family='Arial, sans-serif' font-size='48' font-weight='bold' fill='%232D9CDB'>Vaca</text><text x='140' y='60' font-family='Arial, sans-serif' font-size='48' font-weight='bold' fill='%23F2994A'>Stay</text><path d='M50 40 L70 20 L90 40' stroke='%232D9CDB' stroke-width='5' fill='none'/><rect x='55' y='40' width='30' height='20' fill='%23F2994A' stroke='%232D9CDB' stroke-width='3'/></svg>"
+          alt="Vacation pattern"
+          className="object-cover w-full h-full"
+        />
+      </div>
+
+
+      <Card className="w-full max-w-md shadow-xl border-slate-200 relative z-10 bg-white/90 backdrop-blur-sm">
+        <CardHeader className="space-y-1">
+        
+          <CardTitle className="text-2xl font-bold text-center">
+            Welcome to Paradise Stays
+          </CardTitle>
+          <CardDescription className="text-center text-slate-500">
+            Join us to discover your dream vacation rentals
+          </CardDescription>
+        </CardHeader>
+
+        <CardContent>
+          {error && (
+            <Alert variant="destructive" className="mb-6">
+              <AlertCircle className="h-4 w-4" />
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="name" className="text-slate-600">
+                Full Name
+              </Label>
+              <Input
                 id="name"
-                name="name"
-                type="text"
-                required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="Enter your name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                required
+                className="border-slate-300"
               />
             </div>
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email address
-              </label>
-              <input
+
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-slate-600">
+                Email
+              </Label>
+              <Input
                 id="email"
-                name="email"
                 type="email"
+                placeholder="you@example.com"
                 autoComplete="email"
-                required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="new-password"
                 required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                className="border-slate-300"
               />
             </div>
-          </div>
 
-          <div>
-            <button
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="password" className="text-slate-600">
+                  Password
+                </Label>
+                <Link href="/forgot-password" className="text-xs hover:underline">
+                  Forgot password?
+                </Link>
+              </div>
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="••••••••"
+                  autoComplete="new-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className=" border-slate-300 pr-10"
+                />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-4 w-4 text-slate-500" />
+                  ) : (
+                    <Eye className="h-4 w-4 text-slate-500" />
+                  )}
+                </Button>
+              </div>
+            </div>
+
+            <Button
               type="submit"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="w-full mt-6 text-white"
+              disabled={isLoading}
             >
-              Sign up
-            </button>
-          </div>
-        </form>
-        <div className="text-center">
-          <p className="text-sm text-gray-600">
+              {isLoading ? (
+                <>
+                  <Loader className="mr-2 h-4 w-4 animate-spin" />
+                  Creating account...
+                </>
+              ) : (
+                <>
+                  Start Your Journey
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </>
+              )}
+            </Button>
+          </form>
+        </CardContent>
+
+        <CardFooter className="flex justify-center border-t border-slate-200 p-6">
+          <p className="text-sm text-slate-600">
             Already have an account?{" "}
-            <a href="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
+            <Link href="/login" className="font-medium hover:underline">
               Sign in
-            </a>
+            </Link>
           </p>
-        </div>
-      </div>
+        </CardFooter>
+      </Card>
+
     </div>
-  );
+  )
 }

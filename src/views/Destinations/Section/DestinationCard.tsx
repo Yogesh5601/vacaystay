@@ -7,18 +7,19 @@ import { MapPin } from "lucide-react"
 
 // components/destination-card.tsx
 interface Destination {
-    id: string | number
-    name: string
-    region: string
-    description: string
-    propertyCount: number
-    priceFrom: number
-    image?: string
-    featured?: boolean
-    type?: string  
-  }
+  id: string | number
+  name: string
+  region: string
+  description: string
+  propertyCount: number
+  priceFrom: number
+  image?: string
+  featured?: boolean
+  type?: string
+}
 
-export function DestinationCard({ destination, variant = 'default' }: { destination: Destination, variant?: 'default' | 'featured' }) {
+export const DestinationCard = ({ destination, variant = 'default' }:any) => {
+
   if (variant === 'featured') {
     return (
       <Link href={`/destinations/${destination.id}`}>
@@ -26,7 +27,7 @@ export function DestinationCard({ destination, variant = 'default' }: { destinat
           <div className="grid md:grid-cols-2 h-full">
             <div className="relative ">
               <Image
-                src={destination.image || "/placeholder.svg"}
+                src={destination.coverImage}
                 alt={destination.name}
                 fill
                 className="object-cover "
@@ -43,7 +44,7 @@ export function DestinationCard({ destination, variant = 'default' }: { destinat
               </div>
               <div className="mt-auto">
                 <div className="flex items-center text-sm mb-4">
-                  <span className="font-medium">{destination.propertyCount} properties</span>
+                  <span className="font-medium">{destination.propertyCount || 5} properties</span>
                   <span className="mx-2">•</span>
                   <span>from ${destination.priceFrom}/night</span>
                 </div>
@@ -57,11 +58,11 @@ export function DestinationCard({ destination, variant = 'default' }: { destinat
   }
 
   return (
-    <Link href={`/destinations/${destination.id}`}>
+    <Link href={`/destinations/${destination._id}`}>
       <Card className="overflow-hidden h-full hover:shadow-lg transition-shadow p-0">
         <div className="relative aspect-[4/3]">
           <Image
-            src={destination.image || "/placeholder.svg"}
+            src={destination.coverImage || "/placeholder.svg"}
             alt={destination.name}
             fill
             className="object-cover"

@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/sonner"
+import SessionProviderWrapper from "@/components/SessionProviderWrapper";
 
 
 const geistSans = Geist({
@@ -29,12 +30,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-       className={`w-full flex flex-col justify-center items-center text-black bg-white 3xl:px-[5%] 4xl:px-[20%] ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`w-full flex flex-col justify-center items-center text-black bg-white 3xl:px-[5%] 4xl:px-[20%] ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header/>
-       <div className="py-6 min-h-screen w-full"> {children}</div>
-     
-        <Footer/>
+        <Header />
+        <SessionProviderWrapper>
+          <div className="min-h-screen w-full"> {children}</div>
+        </SessionProviderWrapper>
+
+
+        <Footer />
         <Toaster />
       </body>
     </html>

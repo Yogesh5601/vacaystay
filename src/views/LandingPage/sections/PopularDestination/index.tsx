@@ -5,27 +5,8 @@ import { popularDestinations } from '@/data'
 import axios from 'axios'
 
 
-const PopularDestination = () => {
-  const [destinations, setDestinations] = useState([]);
-  const [loading, setLoading] = useState(true);
-  
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get('/api/destinations');
-        setDestinations(response.data.result.data.slice(0, 4));
-     
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+const PopularDestination = ({destinations}:any) => {
 
-    fetchProducts();
-  }, []);
-
-  console.log(destinations,"destinations")
 
   return (
     <section className=" py-12 px-4  md:py-16 w-full flex justify-center">

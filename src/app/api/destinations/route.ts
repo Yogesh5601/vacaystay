@@ -6,16 +6,10 @@ import Destinations from "@/models/Destinations";
 export async function GET(request: NextRequest) {
     try {
         await connectDB()
-
-
         const total = await Destinations.countDocuments();
-
-
         const data = await Destinations.find()
-            .select("name coverImage")
+            // .select("name coverImage")
             .lean()
-
-
         const result = {
             total,
             data

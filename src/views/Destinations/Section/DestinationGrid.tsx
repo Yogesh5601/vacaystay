@@ -16,7 +16,7 @@ export function DestinationGrid({ destinations, type }: DestinationGridProps) {
     <TabsContent value={type || "all"} className="mt-0 p-0">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
         {filteredDestinations.map((destination) => (
-          <DestinationCard key={destination.id} destination={destination} />
+          <DestinationCard key={destination._id} destination={destination} />
         ))}
       </div>
     </TabsContent>
