@@ -76,7 +76,7 @@
 
 export const sendBookingConfirmationEmail = async (data: any): Promise<any> => {
   try {
-    const response = await fetch('/api/send-email', {
+    const response = await fetch('/api/admin/send-email', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -87,6 +87,8 @@ export const sendBookingConfirmationEmail = async (data: any): Promise<any> => {
         bookingData: data.bookingData
       }),
     });
+
+    console.log(response,"mail response")
 
     if (!response.ok) {
       throw new Error('Failed to send email');

@@ -344,9 +344,6 @@ export function BooknowPopUp({
   checkInDate,
   checkOutDate,
   total,
-  basePrice,
-  taxes,
-  serviceFee,
   onBookNow,
   isOpen,
   onOpenChange
@@ -392,6 +389,7 @@ export function BooknowPopUp({
   const handleBookNowClick = async () => {
     try {
       const secret = await onBookNow(travelerDetails)
+      console.log("Received clientSecret:", secret)
       if (secret) {
         setClientSecret(secret)
         setActiveTab('payment')
@@ -408,24 +406,24 @@ export function BooknowPopUp({
       setBookingError(null)
       
       // Store booking in database
-      const bookingResponse = await axios.post('/api/booking', {
+      const bookingResponse = await axios.post('/api/bookings', {
         propertyId,
-        propertyTitle,
-        propertyImage,
-        travelerDetails,
+        userId:"67e67ce1aff2ee5b8eca1ca0",
         checkInDate,
         checkOutDate,
-        basePrice,
-        taxes,
-        serviceFee,
-        total,
+        totalPrice:total,
+        guests:"2",
+        paymentId:"67e67ce1aff2ee5b8eca1ca0",
         paymentStatus: 'completed',
-        bookingStatus: 'confirmed'
+        bookingStatus: 'confirmed',
+        paymentMethod:"credit_card",
+        specialRequests:"confirmed",
+       
       })
 
       console.log(bookingResponse,"bookingResponsebookingResponsebookingResponse")
 
-      if (bookingResponse.status === 200) {
+      if (bookingResponse.status === 201) {
         console.log('Booking stored successfully:', bookingResponse.data)
         
         // Send confirmation email

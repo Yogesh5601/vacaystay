@@ -5,26 +5,30 @@ import Booking from "@/models/Booking";
 export async function POST(req: Request) {
   try {
     await connectDB();
-    const { checkIn, checkOut, guests, totalPrice, userId, propertyId } = await req.json();
-
-    if (!checkIn || !checkOut || !guests || !totalPrice || !userId || !propertyId) {
-      return NextResponse.json({ error: "All fields are required" }, { status: 400 });
-    }
-
+    const bookingData = await req.json();
 
     const newBooking = new Booking({
-      checkIn,
-      checkOut,
-      guests,
-      totalPrice,
-      userId,
-      propertyId,
-      createdAt: new Date(),
+      ...bookingData, 
+      createdAt: new Date(), 
     });
 
     await newBooking.save();
+
+    console.log(newBooking,"new bookingsss")
+
+    return NextResponse.json(
+      { 
+        message: "Booking created successfully", 
+        booking: newBooking 
+      },
+      { status: 201 }
+    );
+    
   } catch (error) {
-    console.log("error:", error)
-    return NextResponse.json({ error: "Booking failed" }, { status: 500 });
+    console.error("Booking error:", error);
+    return NextResponse.json(
+      { error: "Internal server error" }, 
+      { status: 500 }
+    );
   }
 }
