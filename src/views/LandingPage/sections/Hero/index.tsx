@@ -82,6 +82,7 @@ export default function Hero() {
       handleSearch();
     }
   };
+  
 
   const handleSuggestionClick = (suggestion: any) => {
     setDestination(suggestion.name);
